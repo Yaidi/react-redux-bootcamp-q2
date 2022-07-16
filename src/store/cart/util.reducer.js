@@ -19,3 +19,14 @@ export const changeQuantity = (cart, product, newQuantity) => {
         return item;
     })
 }
+export const removeProduct = (cart, id) => {
+    return cart.filter(item => item.id !== id);
+}
+export const removeFavorites = (favorites, id) => {
+return favorites.filter(favorite => favorite != id)
+}
+
+export const productsFavorites = (products, favorites) => {
+    return products.filter(({id}) => favorites.includes(id)
+    )
+}

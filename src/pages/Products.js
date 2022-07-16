@@ -2,18 +2,26 @@ import React, {useEffect} from 'react'
 import Product from "../components/Product";
 import {useSelector} from "react-redux";
 import {store} from "../store/config";
-import {productsFetch} from "../store/products/slice";
+import {categoriesFetch, productsFetch} from "../store/products/async";
+import Search from "../components/Search";
+import {statusEnum} from "../utils/const";
+import Spinner from "../components/Spinner";
 
 export const Products = () => {
-  const {products} = useSelector((state) => state.products);
+  const {products, status} = useSelector((state) => state.products);
 
   useEffect(() => {
       store.dispatch(productsFetch());
+      store.dispatch(categoriesFetch());
   }, []);
+  if (status === statusEnum.pending){
+      return (<Spinner></Spinner>)
+  }
   return (
       <div className={'container'}>
-        <div className={'mt-4 mb-4'}>
-          <h1 className={'fw-bold'}>Products</h1>
+        <div className={'d-flex justify-content-between mt-4 mb-4'}>
+          <h1 className={'fw-bold col-8'}>Products</h1>
+            <Search></Search>
         </div>
     <div className={'d-flex row'}>
         {

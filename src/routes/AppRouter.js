@@ -15,8 +15,9 @@ export const AppRouter = () => {
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/products'>
-          <Products />
+        <Route path='/products' render={() => {
+          return getUser() ? (<Products />) : (<Redirect to={'/login'}></Redirect>)
+        }}>
         </Route>
         <Route path='/cart' render={() => {
           return getUser() ? (<Cart />) : (<Redirect to={'/login'}></Redirect>)

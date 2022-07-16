@@ -9,7 +9,7 @@ const ProductDetails = ({item}) => {
     const url = images[0];
     const total = totalPrice(price, quantity);
     const remove = (id) => {
-        store.dispatch(removeToCart(id))
+        store.dispatch(removeToCart(id));
     }
     const setNewAmount = (event) => {
         let number = parseInt(event.target.value)

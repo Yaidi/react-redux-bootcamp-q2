@@ -1,15 +1,20 @@
-import React, {useState} from 'react'
+import React, { useState} from 'react'
 import loginApi from "../utils/loginApi";
-import {Redirect} from "react-router-dom";
+import { useHistory} from "react-router-dom";
+import {loginUser} from "../store/user/actions";
+import {store} from "../store/config";
 
 export const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(undefined);
+    const history = useHistory();
+
     const handleSubmit = () => {
         loginApi(userName, password).then((res) => {
             sessionStorage.setItem('user', res)
-            //return (<Redirect push to="/"/>)
+            store.dispatch(loginUser());
+            history.push('/');
         }).catch((err) => setError(err))
     }
 
