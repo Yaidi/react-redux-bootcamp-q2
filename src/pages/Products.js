@@ -25,7 +25,7 @@ export const Products = () => {
         </div>
     <div className={'d-flex row'}>
         {
-          products?.map((product) => (
+          products.map((product) => (
                 <Product product={product} key={product.id}></Product>
             ))
         }

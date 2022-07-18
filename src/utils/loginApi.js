@@ -1,3 +1,5 @@
+import {storageKeys} from "./const";
+
 const mockedUser = {
 	id: '123',
 	username: 'Wizeline',
@@ -15,5 +17,5 @@ export default async function loginApi(username, password) {
 }
 
 export const getUser = () => {
-	return sessionStorage.getItem('user');
+	return sessionStorage.getItem(storageKeys.user);
 }

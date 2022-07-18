@@ -12,13 +12,15 @@ const Search = () => {
     const {favorites} = useSelector(state => state.favorites);
 
     useEffect(() => {
-        store.dispatch(findProductFetch(find));
+        store.dispatch(findProductFetch(find))
     }, [find])
 
     const showFavorites = () => {
+        setSelected('Favorites');
       store.dispatch(showFavoritesProducts(favorites));
     }
     const showAll = () => {
+        setSelected('All Categories')
       store.dispatch(productsFetch());
     }
 

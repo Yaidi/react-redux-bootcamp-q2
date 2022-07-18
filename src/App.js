@@ -1,12 +1,20 @@
 import GlobalStyle from './styles/globalStyles';
 import {AppRouter} from './routes/AppRouter';
-import {connect} from "react-redux";
-import {GetProducts} from "./store/products/actions";
 import {useEffect} from "react";
+import {getUser} from "./utils/loginApi";
+import {loginUser} from "./store/user/actions";
+import {store} from "./store/config";
+import {getFavorites} from "./utils/const";
+import {getFavoritesProducts} from "./store/favorites/actions";
 
 const App = () => {
     useEffect(() => {
-        GetProducts()
+        if (getUser()){
+            store.dispatch(loginUser());
+        }
+        if (getFavorites()){
+            store.dispatch(getFavoritesProducts(getFavorites()));
+        }
     }, [])
   return (
     <>
@@ -15,10 +23,4 @@ const App = () => {
     </>
   );
 }
-
-function mapStateToProps(state) {
-    return {
-        products: state.products
-    }
-}
-export default connect(mapStateToProps, {GetProducts})(App);
+export default App;
